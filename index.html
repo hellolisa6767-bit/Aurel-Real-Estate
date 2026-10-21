@@ -183,7 +183,7 @@ header.open .menu-btn span:first-child{transform:rotate(45deg)}header.open .menu
 .num{margin:0 0 .9rem;font-size:.78rem;font-weight:700;letter-spacing:.16em;color:var(--gold)}.num span{color:var(--muted)}
 .step-txt h3{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-size:clamp(2rem,3.6vw,2.9rem);font-weight:600;line-height:1.05;letter-spacing:-.01em;margin:0 0 1rem;transition:color .3s}
 .step-card:hover .step-txt h3{color:var(--primary)}
-.step-txt .desc{margin:0 0 1.4rem;max-width:46ch;font-size:.98rem;line-height:1.75;color:var(--muted)}
+.step-txt .desc{margin:0;max-width:46ch;font-size:.98rem;line-height:1.75;color:var(--muted)}
 .step-txt .link{align-self:flex-start;font-size:.88rem;font-weight:700;color:var(--primary);border-bottom:2px solid var(--gold);padding-bottom:.15rem;transition:color .25s,gap .25s}
 .step-txt .link:hover{color:var(--dark)}
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:none}
@@ -253,7 +253,7 @@ function headlineHTML(){return esc(SITE.headline).replace(" for "," for<br>").re
 function media(src,desc,cls){return src?'<div class="media '+cls+'"><img src="'+esc(src)+'" alt="'+esc(desc)+'" loading="lazy"></div>':'<div class="ph '+cls+'" role="img" aria-label="'+esc(desc)+'"><span>'+esc(desc)+'</span></div>'}
 function card(p){return '<a class="card" href="#/property/'+p.id+'">'+media(p.img,p.desc,"r16")+'<div class="body"><span class="badge">For '+p.status+'</span><h3 style="margin-top:.6rem">'+esc(p.title)+'</h3><p class="meta">'+esc(p.area)+', '+esc(p.city)+'</p><div class="meta"><span>'+(p.beds?p.beds+' Beds':p.type)+'</span>'+(p.baths?'<span>'+p.baths+' Baths</span>':'')+'<span>'+esc(p.size)+'</span></div><p class="price" style="margin:.7rem 0 0">'+esc(p.price)+'</p></div></a>'}
 function testi(){return '<div class="grid g3">'+TESTIMONIALS.map(function(t){return '<figure class="card" style="margin:0"><blockquote class="quote" style="margin:0">“'+esc(t.q)+'”</blockquote><figcaption class="who">'+esc(t.n)+'<small>'+esc(t.r)+'</small></figcaption></figure>'}).join("")+'</div>'}
-function step(s,i,arr){return '<article class="step-card reveal'+(i%2?' flip':'')+'" aria-labelledby="svc'+i+'"><div class="step-txt"><p class="num">'+String(i+1).padStart(2,"0")+' <span>/ '+String(arr.length).padStart(2,"0")+'</span></p><h3 id="svc'+i+'">'+esc(s.t)+'</h3><p class="desc">'+esc(s.d)+'</p><a class="link" href="#/contact-book">Book a consultation <span aria-hidden="true">→</span></a></div><div class="step-img">'+media(s.img,s.i,"sq")+'</div></article>'}
+function step(s,i,arr){return '<article class="step-card reveal'+(i%2?' flip':'')+'" aria-labelledby="svc'+i+'"><div class="step-txt"><p class="num">'+String(i+1).padStart(2,"0")+'</p><h3 id="svc'+i+'">'+esc(s.t)+'</h3><p class="desc">'+esc(s.d)+'</p></div><div class="step-img">'+media(s.img,s.i,"sq")+'</div></article>'}
 function initLines(){
  var box=$(".steps-list");if(!box)return null;
  var svg=$(".steps-svg",box),cards=Array.prototype.slice.call(box.querySelectorAll(".step-card")),segs=[],mq=matchMedia("(prefers-reduced-motion: reduce)"),raf=0;
