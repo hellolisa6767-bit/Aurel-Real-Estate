@@ -189,6 +189,13 @@ header.open .menu-btn span:first-child{transform:rotate(45deg)}header.open .menu
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:none}
 @media (max-width:760px){.steps-list{gap:3.5rem}.step-card{grid-template-columns:1fr;min-height:0}.step-txt,.step-card.flip .step-txt{order:1;padding:1.6rem 1.3rem}.step-img,.step-card.flip .step-img{order:2;min-height:0;aspect-ratio:16/10}}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.step-card:hover .step-img img{transform:none}}
+
+/* photo banner behind every page header */
+.pagehead{position:relative;padding-bottom:clamp(3rem,7vw,5.5rem);color:#FBF1DC;border-bottom:0;background-color:var(--dark);background-image:linear-gradient(90deg,rgba(41,42,40,.78) 0%,rgba(41,42,40,.5) 55%,rgba(41,42,40,.28) 100%),linear-gradient(to top,rgba(41,42,40,.55),rgba(41,42,40,0) 55%),var(--banner);background-size:cover;background-position:center 42%}
+.pagehead .eyebrow{color:var(--gold)!important}
+.pagehead h1{color:#FBF1DC}
+.pagehead .lead{color:rgba(251,241,220,.9)!important}
+@media (max-width:640px){.pagehead{background-position:62% 40%}}
 </style>
 </head>
 <body>
@@ -277,7 +284,7 @@ function initLines(){
 function svc(s){return '<article class="card">'+media(s.img,s.i,"r16")+'<div class="body"><h3>'+esc(s.t)+'</h3><p style="color:var(--muted);margin:0">'+esc(s.d)+'</p></div></article>'}
 function bookForm(sel){return '<form data-form="Booking request" novalidate><div class="two"><label>Full name<input name="name" required autocomplete="name"></label><label>Phone<input name="phone" type="tel" required autocomplete="tel"></label></div><div class="two"><label>Email<input name="email" type="email" required autocomplete="email"></label><label>Property<select name="property"><option>Not sure yet</option>'+PROPERTIES.map(function(p){return '<option'+(sel===p.id?' selected':'')+'>'+esc(p.title)+'</option>'}).join("")+'</select></label></div><div class="two"><label>Preferred date<input name="date" type="date" required></label><label>Preferred time<select name="time"><option>Morning (9–12)</option><option>Afternoon (12–4)</option><option>Evening (4–6)</option></select></label></div><label>Message (optional)<textarea name="message" rows="3"></textarea></label><button class="btn" type="submit">Book Viewing</button><div class="ok" role="status"></div></form>'}
 function contactForm(){return '<form data-form="Website inquiry" novalidate><div class="two"><label>Full name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label></div><label>Phone<input name="phone" type="tel" autocomplete="tel"></label><label>I am interested in<select name="interest"><option>Buying</option><option>Selling</option><option>Renting</option><option>Property management</option><option>Other</option></select></label><label>Message<textarea name="message" rows="5" required></textarea></label><button class="btn" type="submit">Send Inquiry</button><div class="ok" role="status"></div></form>'}
-function pagehead(e,t,s){return '<section class="pagehead"><div class="wrap"><div class="eyebrow" style="color:var(--forest)">'+e+'</div><h1 style="font-size:clamp(2rem,4.5vw,3.4rem);font-weight:600">'+t+'</h1><p class="lead" style="color:var(--slate)">'+s+'</p></div></section>'}
+function pagehead(e,t,s){return '<section class="pagehead"><div class="wrap"><div class="eyebrow">'+e+'</div><h1 style="font-size:clamp(2rem,4.5vw,3.4rem);font-weight:600">'+t+'</h1><p class="lead">'+s+'</p></div></section>'}
 
 var VIEWS={
 home:function(){var f=PROPERTIES.slice(0,3);return '<section class="hero" id="hero"><canvas aria-hidden="true"></canvas><div class="ui"><div class="bottom"><h1>'+headlineHTML()+'</h1><p class="tag">'+esc(SITE.heroText)+'</p><div class="cta"><a class="btn" href="#/contact-book">Book Now</a><a class="btn ghost" href="#/properties">View Properties</a></div></div></div></section>'+
@@ -350,10 +357,10 @@ function setMenu(o){hdr.classList.toggle("open",o);mbtn.setAttribute("aria-expan
 mbtn.addEventListener("click",function(){setMenu(!hdr.classList.contains("open"))});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")setMenu(false)});
 $("#navpanel").addEventListener("click",function(e){if(e.target.closest("a"))setMenu(false)});
+document.documentElement.style.setProperty("--banner",'url("'+HERO_IMG+'")');
 $("#yr").textContent=new Date().getFullYear();
 $("#f-contact").innerHTML=esc(SITE.address)+'<br>'+esc(SITE.phone)+'<br>'+esc(SITE.email);
 addEventListener("hashchange",route);route();
 </script>
 </body>
 </html>
-
